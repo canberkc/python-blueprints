@@ -19,7 +19,6 @@ def start_process(file_path, result_path):
         root = tree.getroot()
         blocks_array = []
         for child in root:
-            # print(child.tag, child.attrib)
             if child.tag == 'blocks':
                 handle_blocks(child, blocks_array, problem_pages, xml_file)
                 text_form = json.dumps(blocks_array)
@@ -39,7 +38,6 @@ def handle_blocks(element, blocks_array, problem_pages, current_file):
     block_nr = 0
     for block in element:
         block_nr += 1
-        # print(child.tag, child.attrib)
         block_dict = {}
         block_dict.update({'block': block_nr})
         block_dict.update({'id': block.attrib['id']})
@@ -55,7 +53,6 @@ def handle_blocks(element, blocks_array, problem_pages, current_file):
 
 def handle_block(block_element, block_dict, problem_pages, current_file):
     for child in block_element:
-        # print(child.tag, child.attrib)
         if child.tag == 'pages':
             handle_pages(child, block_dict)
         if child.tag == 'filters':
@@ -78,7 +75,6 @@ def handle_pages(element, bl_dict):
     page_nr = 0
     for child in element:
         page_nr += 1
-        # print(child.tag, child.attrib)
         page_dict = {}
         page_dict.update({'page_id': page_nr})
         page_dict.update({'allrows': child.attrib['allrows']})
@@ -108,7 +104,6 @@ def handle_page(item, p_dict):
 
 def handle_cols(item, col_array):
     for child in item:
-        # print(child.tag, child.attrib)
         c_dict = {}
         c_dict.update({'name': child.attrib['name']})
         c_dict.update({'width': child.attrib['width']})
@@ -124,7 +119,6 @@ def handle_cols(item, col_array):
 
 def handle_rows(item, row_array):
     for child in item:
-        # print(child.tag, child.attrib)
         r_dict = {}
         r_dict.update({'name': child.attrib['name']})
 
@@ -142,7 +136,6 @@ def handle_rows(item, row_array):
 
 def handle_cells(item, cell_array):
     for child in item:
-        # print(child.tag, child.attrib)
         cell_dict = {}
         cell_dict.update({'style': {}})
         cell_dict.update({'rowname': child.attrib['rowname']})
@@ -178,7 +171,6 @@ def handle_style(item, style_dict):
     style_dict.update({'font': {}})
     style_dict.update({'border': []})
     for child in item:
-        # print(child.tag, child.attrib)
         if child.tag == 'text':
             style_dict.update({'text': child.text})
 
@@ -190,7 +182,6 @@ def handle_style(item, style_dict):
 
 
 def handle_border(item, border_array):
-    # print(item.tag, item.attrib)
     border_dict = {}
     border_dict.update({'type': item.attrib['type']})
 
@@ -204,7 +195,6 @@ def handle_border(item, border_array):
 
 
 def handle_font(item, font_dict):
-    # print(item.tag, item.attrib)
     font_dict.update({'family': item.attrib['family']})
     font_dict.update({'size': item.attrib['size'] + 'px'})
 
@@ -232,8 +222,8 @@ def write_to_file(file_destination, content):
 
 
 def main():
-    file_path = 'C:/PythonWS/DevLab/ScripeUtils/source/report_folder'
-    result_path = 'C:/PythonWS/DevLab/ScripeUtils/source/result_folder'
+    file_path = 'source_path'
+    result_path = 'result_path'
     start_process(file_path, result_path)
 
 
